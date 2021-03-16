@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -45,74 +46,76 @@ import com.example.androiddevchallenge.R
 
 @Composable
 fun Welcome() {
-    Box(Modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_welcome_bg),
-            contentDescription = "background",
-            modifier = Modifier.fillMaxSize()
-        )
-        Column(Modifier.fillMaxSize()) {
-            Spacer(modifier = Modifier.height(72.dp))
+    Surface(color = MaterialTheme.colors.primary) {
+        Box(Modifier.fillMaxSize()) {
             Image(
-                painter = painterResource(id = R.drawable.ic_welcome_illos),
-                contentDescription = "leaf",
-                modifier = Modifier
-                    .padding(start = 88.dp)
-                    .fillMaxWidth()
-                    .aspectRatio(1f),
-                alignment = Alignment.TopStart,
-                contentScale = ContentScale.FillHeight
+                painter = painterResource(id = R.drawable.ic_welcome_bg),
+                contentDescription = "background",
+                modifier = Modifier.fillMaxSize()
             )
-            Spacer(modifier = Modifier.height(48.dp))
-            Image(
-                painter = painterResource(id = R.drawable.ic_logo),
-                contentDescription = "logo",
-                modifier = Modifier.fillMaxWidth()
-            )
-            Text(
-                text = "Beautiful home garden solutions",
-                modifier = Modifier
-                    .firstBaselineToVertical(32.dp, 40.dp)
-                    .fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.subtitle1,
-                color = MaterialTheme.colors.onBackground,
-            )
-            Button(
-                onClick = {
-
-                },
-                modifier = Modifier
-                    .height(48.dp)
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                shape = MaterialTheme.shapes.medium,
-                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
-            ) {
-                Text(text = "Create account", style = MaterialTheme.typography.button)
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            TextButton(
-                onClick = {
-
-                },
-                modifier = Modifier
-                    .height(48.dp)
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                shape = MaterialTheme.shapes.medium,
-                colors = ButtonDefaults.textButtonColors(
-                    contentColor = if (isSystemInDarkTheme()) {
-                        MaterialTheme.colors.onBackground
-                    } else {
-                        MaterialTheme.colors.secondary
-                    }
+            Column(Modifier.fillMaxSize()) {
+                Spacer(modifier = Modifier.height(72.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.ic_welcome_illos),
+                    contentDescription = "leaf",
+                    modifier = Modifier
+                        .padding(start = 88.dp)
+                        .fillMaxWidth()
+                        .aspectRatio(1f),
+                    alignment = Alignment.TopStart,
+                    contentScale = ContentScale.FillHeight
                 )
-            ) {
+                Spacer(modifier = Modifier.height(48.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.ic_logo),
+                    contentDescription = "logo",
+                    modifier = Modifier.fillMaxWidth()
+                )
                 Text(
-                    text = "Log in",
-                    style = MaterialTheme.typography.button
+                    text = "Beautiful home garden solutions",
+                    modifier = Modifier
+                        .firstBaselineToVertical(32.dp, 40.dp)
+                        .fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.subtitle1,
+                    color = MaterialTheme.colors.onBackground,
                 )
+                Button(
+                    onClick = {
+
+                    },
+                    modifier = Modifier
+                        .height(48.dp)
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    shape = MaterialTheme.shapes.medium,
+                    colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
+                ) {
+                    Text(text = "Create account", style = MaterialTheme.typography.button)
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                TextButton(
+                    onClick = {
+
+                    },
+                    modifier = Modifier
+                        .height(48.dp)
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    shape = MaterialTheme.shapes.medium,
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = if (isSystemInDarkTheme()) {
+                            MaterialTheme.colors.onBackground
+                        } else {
+                            MaterialTheme.colors.secondary
+                        }
+                    )
+                ) {
+                    Text(
+                        text = "Log in",
+                        style = MaterialTheme.typography.button
+                    )
+                }
             }
         }
     }

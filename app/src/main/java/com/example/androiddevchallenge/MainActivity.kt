@@ -18,12 +18,10 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
-import com.example.androiddevchallenge.ui.Welcome
+import com.example.androiddevchallenge.ui.Login
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 
@@ -41,12 +39,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// Start building your app here!
 @Composable
 fun MyApp() {
-    Surface(color = MaterialTheme.colors.primary) {
-        Welcome()
-    }
+//    Welcome()
+    Login()
 }
 
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
