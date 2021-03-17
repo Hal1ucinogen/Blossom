@@ -81,9 +81,7 @@ fun Welcome() {
                     color = MaterialTheme.colors.onBackground,
                 )
                 Button(
-                    onClick = {
-
-                    },
+                    onClick = {},
                     modifier = Modifier
                         .height(48.dp)
                         .fillMaxWidth()
@@ -95,9 +93,7 @@ fun Welcome() {
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 TextButton(
-                    onClick = {
-
-                    },
+                    onClick = {},
                     modifier = Modifier
                         .height(48.dp)
                         .fillMaxWidth()

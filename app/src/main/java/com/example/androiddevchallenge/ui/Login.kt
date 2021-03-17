@@ -33,7 +33,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.MyTheme
@@ -62,6 +67,7 @@ fun Login() {
                         color = MaterialTheme.colors.onBackground
                     )
                 },
+                maxLines = 1,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
@@ -79,13 +85,24 @@ fun Login() {
                         color = MaterialTheme.colors.onBackground
                     )
                 },
+                maxLines = 1,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
                     .padding(horizontal = 16.dp)
             )
             Text(
-                text = "By clicking below, you agree to our Terms of Use and consent to our Privacy Policy.",
+                text = buildAnnotatedString {
+                    append("By clicking below, you agree to our ")
+                    withStyle(style = SpanStyle(textDecoration = TextDecoration.Underline)) {
+                        append("Terms of Use")
+                    }
+                    append(" and consent to our ")
+                    withStyle(style = SpanStyle(textDecoration = TextDecoration.Underline)) {
+                        append("Privacy Policy")
+                    }
+                    append(".")
+                },
                 modifier = Modifier
                     .firstBaselineToVertical(24.dp, 16.dp)
                     .fillMaxWidth()
@@ -95,9 +112,7 @@ fun Login() {
                 color = MaterialTheme.colors.onBackground,
             )
             Button(
-                onClick = {
-
-                },
+                onClick = {},
                 modifier = Modifier
                     .height(48.dp)
                     .fillMaxWidth()
