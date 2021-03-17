@@ -15,22 +15,16 @@
  */
 package com.example.androiddevchallenge.ui
 
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.BottomAppBar
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.ui.graphics.vector.ImageVector
 
-@Composable
-fun BlossomBottomNav(
-    modifier: Modifier = Modifier,
-    elevation: Dp = 16.dp,
-    content: @Composable RowScope.() -> Unit
-) {
-    BottomAppBar(
-        modifier = modifier,
-        elevation = elevation,
-        content = content
-    )
+enum class HomeScreen(val route: String, val title: String, val icon: ImageVector) {
+    Home("home", "Home", Icons.Default.Home),
+    Favorites("favorites", "Favorites", Icons.Default.FavoriteBorder),
+    Profile("profile", "Profile", Icons.Default.AccountCircle),
+    Cart("cart", "Cart", Icons.Default.ShoppingCart)
 }

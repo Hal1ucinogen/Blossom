@@ -13,23 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui
+package com.example.androiddevchallenge.ui.component
 
-import androidx.compose.material.Card
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun BlossomCard(
+fun BlossomBottomNav(
     modifier: Modifier = Modifier,
-    elevation: Dp = 1.dp,
-    content: @Composable () -> Unit
+    elevation: Dp = 16.dp,
+    content: @Composable RowScope.() -> Unit
 ) {
-    Card(
+    BottomNavigation(
         modifier = modifier,
         elevation = elevation,
+        backgroundColor = MaterialTheme.colors.primary,
         content = content
     )
 }

@@ -15,21 +15,9 @@
  */
 package com.example.androiddevchallenge.ui
 
-import androidx.compose.material.Snackbar
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import androidx.annotation.DrawableRes
 
-@Composable
-fun BlossomSnack(
-    modifier: Modifier = Modifier,
-    elevation: Dp = 2.dp,
-    content: @Composable () -> Unit
-) {
-    Snackbar(
-        modifier = modifier,
-        elevation = elevation,
-        content = content
-    )
-}
+data class Plant(
+    val name: String,
+    @DrawableRes val image: Int
+)
