@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -145,7 +146,7 @@ fun HomePage() {
             Text(
                 text = "Browse themes",
                 modifier = Modifier
-                    .firstBaselineToVertical(32.dp, 8.dp)
+                    .paddingFromBaseline(32.dp, 8.dp)
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
                 textAlign = TextAlign.Start,
@@ -182,7 +183,7 @@ fun HomePage() {
                                 overflow = TextOverflow.Ellipsis,
                                 style = MaterialTheme.typography.h2,
                                 modifier = Modifier
-                                    .firstBaselineToVertical(24.dp, 16.dp)
+                                    .paddingFromBaseline(24.dp, 16.dp)
                                     .fillMaxWidth()
                                     .padding(horizontal = 16.dp)
                             )
@@ -197,7 +198,7 @@ fun HomePage() {
                 Text(
                     text = "Design your home garden",
                     modifier = Modifier
-                        .firstBaselineToVertical(32.dp, 16.dp)
+                        .paddingFromBaseline(32.dp,16.dp)
                         .weight(1f),
                     textAlign = TextAlign.Start,
                     style = MaterialTheme.typography.h1,

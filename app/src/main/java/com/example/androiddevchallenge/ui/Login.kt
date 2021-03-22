@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
@@ -49,7 +50,7 @@ fun Login() {
             Text(
                 text = "Log in with email",
                 modifier = Modifier
-                    .firstBaselineToVertical(184.dp, 8.dp)
+                    .paddingFromBaseline(184.dp, 8.dp)
                     .fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h1,
@@ -103,7 +104,7 @@ fun Login() {
                     append(".")
                 },
                 modifier = Modifier
-                    .firstBaselineToVertical(24.dp, 16.dp)
+                    .paddingFromBaseline(24.dp, 16.dp)
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
                 textAlign = TextAlign.Center,

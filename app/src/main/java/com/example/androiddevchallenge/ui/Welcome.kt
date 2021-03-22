@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
@@ -34,13 +35,9 @@ import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.AlignmentLine
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.FirstBaseline
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
 
@@ -74,7 +71,7 @@ fun Welcome() {
                 Text(
                     text = "Beautiful home garden solutions",
                     modifier = Modifier
-                        .firstBaselineToVertical(32.dp, 40.dp)
+                        .paddingFromBaseline(32.dp, 40.dp)
                         .fillMaxWidth(),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.subtitle1,
@@ -114,25 +111,5 @@ fun Welcome() {
                 }
             }
         }
-    }
-}
-
-fun Modifier.firstBaselineToVertical(
-    top: Dp,
-    bottom: Dp
-) = Modifier.layout { measurable, constraints ->
-    // Measure the composable
-    val placeable = measurable.measure(constraints)
-
-    // Check the composable has a first baseline
-    check(placeable[FirstBaseline] != AlignmentLine.Unspecified)
-    val firstBaseline = placeable[FirstBaseline]
-
-    // Height of the composable with padding - first baseline
-    val placeableY = top.roundToPx() - firstBaseline
-    val height = placeable.height + placeableY + bottom.roundToPx()
-    layout(placeable.width, height) {
-        // Where the composable gets placed
-        placeable.placeRelative(0, placeableY)
     }
 }
