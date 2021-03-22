@@ -20,16 +20,21 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Checkbox
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -37,6 +42,7 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.Search
@@ -53,6 +59,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -113,11 +121,9 @@ fun Home() {
 @Composable
 fun HomePage() {
     Surface(color = MaterialTheme.colors.background) {
-        val scrollState = rememberScrollState()
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(scrollState)
         ) {
             var search by remember { mutableStateOf("") }
             OutlinedTextField(
@@ -134,14 +140,14 @@ fun HomePage() {
                     Text(
                         "Search",
                         style = MaterialTheme.typography.body1,
-                        color = MaterialTheme.colors.onBackground
                     )
                 },
                 maxLines = 1,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 0.dp)
-                    .statusBarsPadding()
+                    .statusBarsPadding(),
+                colors = TextFieldDefaults.outlinedTextFieldColors(textColor = MaterialTheme.colors.onBackground)
             )
             Text(
                 text = "Browse themes",
@@ -198,7 +204,7 @@ fun HomePage() {
                 Text(
                     text = "Design your home garden",
                     modifier = Modifier
-                        .paddingFromBaseline(32.dp,16.dp)
+                        .paddingFromBaseline(32.dp, 16.dp)
                         .weight(1f),
                     textAlign = TextAlign.Start,
                     style = MaterialTheme.typography.h1,
@@ -214,18 +220,78 @@ fun HomePage() {
                 Plant("Peace lily", R.drawable.peace_lily),
                 Plant("Fiddle leaf tree", R.drawable.fiddle_leaf),
                 Plant("Snake plant", R.drawable.snake_plant),
+                Plant("Pothos", R.drawable.pothos),
+                Plant("Fiddle leaf tree", R.drawable.fiddle_leaf),
+                Plant("Snake plant", R.drawable.snake_plant),
                 Plant("Pothos", R.drawable.pothos)
             )
-            columnPlants.forEach { plant ->
-                Row(modifier = Modifier.padding(bottom = 8.dp, start = 16.dp, end = 16.dp)) {
-                    Image(
-                        painter = painterResource(id = plant.image),
-                        contentDescription = plant.name,
-                        contentScale = ContentScale.Crop,
+            LazyColumn(
+                contentPadding = PaddingValues(16.dp, 0.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                itemsIndexed(columnPlants) { index, plant ->
+                    ConstraintLayout(
                         modifier = Modifier
-                            .size(64.dp)
-                            .clip(MaterialTheme.shapes.small)
-                    )
+                            .fillMaxWidth()
+                            .wrapContentHeight()
+                    ) {
+                        val (image, title, desc, divider, checkbox) = createRefs()
+                        Image(
+                            painter = painterResource(id = plant.image),
+                            contentDescription = plant.name,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .aspectRatio(1f, true)
+                                .constrainAs(image) {
+                                    start.linkTo(parent.start)
+                                    top.linkTo(parent.top)
+                                    bottom.linkTo(parent.bottom)
+                                    height = Dimension.fillToConstraints
+                                }
+                                .clip(MaterialTheme.shapes.small)
+                        )
+                        Text(
+                            text = plant.name,
+                            style = MaterialTheme.typography.h2,
+                            modifier = Modifier
+                                .constrainAs(title) {
+                                    start.linkTo(image.end, 16.dp)
+                                    top.linkTo(parent.top)
+                                }
+                                .paddingFromBaseline(top = 24.dp)
+                        )
+                        Text(
+                            text = "This is a description",
+                            style = MaterialTheme.typography.body1,
+                            modifier = Modifier
+                                .constrainAs(desc) {
+                                    start.linkTo(title.start)
+                                    top.linkTo(title.bottom)
+                                    bottom.linkTo(parent.bottom)
+                                }
+                                .paddingFromBaseline(bottom = 24.dp)
+                        )
+                        var checked by remember { mutableStateOf(index == 0) }
+                        Checkbox(
+                            checked = checked,
+                            onCheckedChange = { checked = it },
+                            modifier = Modifier.constrainAs(checkbox) {
+                                end.linkTo(parent.end)
+                                bottom.linkTo(desc.bottom, 24.dp)
+                            }
+                        )
+                        Divider(
+                            modifier = Modifier
+                                .constrainAs(divider) {
+                                    start.linkTo(image.end, 8.dp)
+                                    end.linkTo(parent.end)
+                                    bottom.linkTo(parent.bottom)
+                                    height = Dimension.value(1.dp)
+                                    width = Dimension.fillToConstraints
+                                },
+                            color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+                        )
+                    }
                 }
             }
         }
