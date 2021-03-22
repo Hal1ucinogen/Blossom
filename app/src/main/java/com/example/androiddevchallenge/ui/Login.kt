@@ -44,7 +44,7 @@ import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 @Composable
-fun Login() {
+fun Login(onLoginClick: () -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
         Column(Modifier.fillMaxSize()) {
             Text(
@@ -112,7 +112,7 @@ fun Login() {
                 color = MaterialTheme.colors.onBackground,
             )
             Button(
-                onClick = {},
+                onClick = { onLoginClick() },
                 modifier = Modifier
                     .height(48.dp)
                     .fillMaxWidth()
@@ -130,7 +130,7 @@ fun Login() {
 @Composable
 fun LightLoginPreview() {
     MyTheme {
-        Login()
+        Login {}
     }
 }
 
@@ -138,6 +138,6 @@ fun LightLoginPreview() {
 @Composable
 fun DarkLoginPreview() {
     MyTheme(darkTheme = true) {
-        Login()
+        Login {}
     }
 }

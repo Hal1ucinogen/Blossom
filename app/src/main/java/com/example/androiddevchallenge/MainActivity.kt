@@ -18,10 +18,18 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.Crossfade
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import com.example.androiddevchallenge.ui.Home
+import com.example.androiddevchallenge.ui.Login
+import com.example.androiddevchallenge.ui.Screen
+import com.example.androiddevchallenge.ui.Welcome
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 
@@ -41,9 +49,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp() {
-//    Welcome()
-//    Login()
-    Home()
+    var screen by remember { mutableStateOf(Screen.Welcome) }
+    Crossfade(targetState = screen) {
+        when (screen) {
+            Screen.Welcome -> Welcome { screen = Screen.Login }
+            Screen.Login -> Login { screen = Screen.Home }
+            Screen.Home -> Home()
+        }
+    }
 }
 
 @Preview("Light Theme", widthDp = 360, heightDp = 640)

@@ -42,7 +42,7 @@ import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.R
 
 @Composable
-fun Welcome() {
+fun Welcome(onLoginClick: () -> Unit) {
     Surface(color = MaterialTheme.colors.primary) {
         Box(Modifier.fillMaxSize()) {
             Image(
@@ -90,7 +90,7 @@ fun Welcome() {
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 TextButton(
-                    onClick = {},
+                    onClick = { onLoginClick() },
                     modifier = Modifier
                         .height(48.dp)
                         .fillMaxWidth()
